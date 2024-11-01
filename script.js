@@ -70,7 +70,9 @@ const displayMovements = function (movements) {
 
     const html = `
     <div class="movements__row">
-      <div class="movements__type movements__type--${type}">${index} ${type}</div>
+      <div class="movements__type movements__type--${type}">${
+      index + 1
+    } ${type}</div>
       <div class="movements__date">3 days ago</div>
       <div class="movements__value">${mov}</div>
     </div>
@@ -80,6 +82,13 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+// Calc Balance
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, curr) => acc + curr, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
 
 /// Create username
 const createUsername = function (accs) {
