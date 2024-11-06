@@ -152,30 +152,6 @@ btnLogin.addEventListener('click', function (e) {
 
 // TO-DO Test the transfer multiple times
 // Transfer money
-// btnTransfer.addEventListener('click', function (e) {
-//   e.preventDefault();
-//   const amount = Number(inputTransferAmount.value);
-//   const receiverAcc = accounts.find(
-//     (acc) => acc.userName === inputTransferTo.value
-//   );
-//   inputTransferAmount.value = inputTransferTo.value = ' ';
-//   if (amount > 0 && currentAccount.balance >= amount) {
-//     if (receiverAcc && receiverAcc?.userName !== currentAccount.userName) {
-//       currentAccount.movements.push(-amount);
-//       receiverAcc.movements.push(amount);
-//       // Update UI
-//       updateUI(currentAccount);
-//       labelTransferMessage.textContent = 'Money sent';
-//     } else {
-//       labelTransferMessage.textContent =
-//         'There is an error in the person field, please try again.';
-//     }
-//   } else {
-//     labelTransferMessage.textContent =
-//       'There is an error in the amount field, please try again.';
-//   }
-// });
-
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
@@ -202,8 +178,16 @@ console.log(account1, currentAccount);
 // TODO: Request a loan
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const amount = Number(inputLoanAmount.value);
-  console.log(amount);
+  const loanAmount = Number(inputLoanAmount.value);
+  if (
+    loanAmount > 0 &&
+    currentAccount.movements.some((mov) => mov >= loanAmount * 0.1)
+  ) {
+    currentAccount.movements.push(loanAmount);
+    // Update UI
+    updateUI(currentAccount);
+    inputLoanAmount.value = '';
+  }
 });
 
 // TODO: Close account
@@ -214,8 +198,15 @@ btnClose.addEventListener('click', function (e) {
   console.log(user, pin);
   if (user === currentAccount.userName && pin === currentAccount.pin) {
     console.log('remove');
+    const index = accounts.findIndex(
+      (acc) => acc.userName === currentAccount.userName
+    );
+    accounts.splice(index, 1);
     document.querySelector('.app').classList.remove('visible');
+    inputClosePin.blur();
+    console.log(index);
   }
+  inputCloseUsername.value = inputClosePin.value = '';
 });
 
 // TODO: Sort ascending and descending
