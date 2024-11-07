@@ -177,7 +177,7 @@ btnTransfer.addEventListener('click', function (e) {
 calcDisplayBalance(account1);
 console.log(account1, currentAccount);
 
-// Request a loan
+// Request a loa
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const loanAmount = Number(inputLoanAmount.value);
