@@ -75,7 +75,7 @@ const displayMovements = function (movements, sort = false) {
       index + 1
     } ${type}</div>
       <div class="movements__date">3 days ago</div>
-      <div class="movements__value">${mov}€</div>
+      <div class="movements__value">${mov.toFixed(2)}€</div>
     </div>
         `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -88,7 +88,7 @@ const calcDisplayBalance = function (acc) {
     (accumulator, currMov) => accumulator + currMov,
     0
   );
-  labelBalance.textContent = `${acc.balance}€`;
+  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 // TODO - WHAT IS MATH.ABS? ⚠️
@@ -97,17 +97,17 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, curr) => acc + curr, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
   const out = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, curr) => acc + curr, 0);
-  labelSumOut.textContent = `${Math.abs(out)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
   const interest = acc.movements
     .filter((mov) => mov > 0)
     .map((mov) => (mov * acc.interestRate) / 100)
     .filter((int) => int >= 1)
     .reduce((acc, curr) => acc + curr, 0);
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 /// Create username
@@ -180,7 +180,7 @@ console.log(account1, currentAccount);
 // Request a loa
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const loanAmount = Number(inputLoanAmount.value);
+  const loanAmount = Number(Math.floor(inputLoanAmount.value));
   if (
     loanAmount > 0 &&
     currentAccount.movements.some((mov) => mov >= loanAmount * 0.1)
