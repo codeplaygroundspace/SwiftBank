@@ -63,9 +63,11 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 // displayMovements(account1.movements)
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach((mov, index) => {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach((mov, index) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -150,7 +152,7 @@ btnLogin.addEventListener('click', function (e) {
   }
 });
 
-// TO-DO Test the transfer multiple times
+// Test the transfer multiple times
 // Transfer money
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
@@ -175,7 +177,7 @@ btnTransfer.addEventListener('click', function (e) {
 calcDisplayBalance(account1);
 console.log(account1, currentAccount);
 
-// TODO: Request a loan
+// Request a loan
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const loanAmount = Number(inputLoanAmount.value);
@@ -190,7 +192,7 @@ btnLoan.addEventListener('click', function (e) {
   }
 });
 
-// TODO: Close account
+// Close account
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   const user = inputCloseUsername.value;
@@ -209,10 +211,10 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
-// TODO: Sort ascending and descending
+// Sort ascending and descending
+let sort = true;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  console.log('sort');
+  displayMovements(currentAccount.movements, sort);
+  sort = !sort;
 });
-
-// TODO: Time and date
