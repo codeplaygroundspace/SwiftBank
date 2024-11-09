@@ -270,7 +270,6 @@ btnLoan.addEventListener('click', function (e) {
     loanAmount > 0 &&
     currentAccount.movements.some((mov) => mov >= loanAmount * 0.1)
   ) {
-<<<<<<< HEAD
     currentAccount.movements.push(loanAmount);
     currentAccount.movementsDates.push(new Date().toISOString());
     // Update UI
@@ -280,16 +279,7 @@ btnLoan.addEventListener('click', function (e) {
     // Reset timer
     clearInterval(timer);
     timer = startLogOutTimer();
-=======
-    setTimeout(function () {
-      currentAccount.movements.push(loanAmount);
-      currentAccount.movementsDates.push(new Date().toISOString());
-      // Update UI
-      updateUI(currentAccount);
-    }, 1400);
->>>>>>> origin/main
   }
-  inputLoanAmount.value = '';
 });
 
 // Close account
