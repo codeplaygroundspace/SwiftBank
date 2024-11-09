@@ -130,7 +130,6 @@ const calcDisplayBalance = function (acc) {
   labelBalance.textContent = formatC(acc.balance, acc.locale, acc.currency);
 };
 
-// TODO - WHAT IS MATH.ABS? ⚠️
 // Calc summary
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
@@ -184,7 +183,7 @@ const startLogOutTimer = function () {
   };
 
   // Set time to 5 min
-  let time = 9;
+  let time = 500;
   // call timer every second
   tick();
   const timer = setInterval(tick, 1000);
@@ -230,16 +229,15 @@ btnLogin.addEventListener('click', function (e) {
   }
 });
 
-// Test the transfer multiple times
 // Transfer money
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputTransferAmount.value);
-
+  const amount = Number(inputTransferAmount.value.trim());
   const receiverAcc = accounts.find(
     (acc) => acc.userName === inputTransferTo.value.trim()
   );
+
   inputTransferAmount.value = inputTransferTo.value = ' ';
   if (
     amount > 0 &&
@@ -259,6 +257,7 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+// Display account balance
 calcDisplayBalance(account1);
 console.log(account1, currentAccount);
 
@@ -301,7 +300,7 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
-// Sort ascending and descending
+// Sort movements ascending and descending
 let sort = true;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();

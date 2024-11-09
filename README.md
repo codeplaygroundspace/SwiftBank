@@ -16,13 +16,13 @@ To set up the SwiftBank app on your local machine:
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/codeplaygroundspace/SwiftBank-app.git
+   git clone https://github.com/codeplaygroundspace/SwiftBank.git
    ```
 
 2. **Navigate to the project directory**:
 
    ```bash
-   cd SwiftBank-app
+   cd SwiftBank
    ```
 
 3. **Open `index.html` in your browser** to start using the application.
